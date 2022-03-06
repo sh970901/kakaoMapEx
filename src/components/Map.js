@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 const infowindow = new kakao.maps.InfoWindow({ removable: true, width: 500 });
 
 const Map = (props) => {
-
+  
   useEffect(() => {
     let container = document.getElementById("map");
     let options = {
@@ -27,7 +27,7 @@ const Map = (props) => {
   }, [])
 
   function displayArea(map, area) {
-
+    
     const customOverlay = new kakao.maps.CustomOverlay({})
 
 
@@ -69,13 +69,18 @@ const Map = (props) => {
 
     // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
     kakao.maps.event.addListener(polygon, 'click', function (mouseEvent) {
-      
+      // function show(){
+      //   console.log("gg")
+      // }
       var content = 
         '<div class="info">' +
         '   <div class="title">' + area.name + '</div>' +
         '   <div class="size">총 면적 : 약 ' + Math.floor(polygon.getArea()) + ' m<sup>2</sup></div>' +
-        '<div> <button onclick="goBack()">정보 보기</button> <script> function goBack(){console.log("hh)}</script> </div>' +
+        '<div> <input type="button" onclick="console.log(\'gg\')" value="btn1"></div>' +
         '</div>';
+
+        
+        ;
         
 
       infowindow.setContent(content);
