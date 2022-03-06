@@ -1,9 +1,10 @@
 /*global kakao*/
 import React, { useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
 const infowindow = new kakao.maps.InfoWindow({ removable: true, width: 500 });
 
 const Map = (props) => {
-  
+  const history = useHistory();
   useEffect(() => {
     let container = document.getElementById("map");
     let options = {
@@ -27,7 +28,7 @@ const Map = (props) => {
   }, [])
 
   function displayArea(map, area) {
-    
+
     const customOverlay = new kakao.maps.CustomOverlay({})
 
 
@@ -72,24 +73,32 @@ const Map = (props) => {
       // function show(){
       //   console.log("gg")
       // }
-      var content = 
-        '<div class="info">' +
-        '   <div class="title">' + area.name + '</div>' +
-        '   <div class="size">총 면적 : 약 ' + Math.floor(polygon.getArea()) + ' m<sup>2</sup></div>' +
-        '<div> <input type="button" onclick="console.log(\'gg\')" value="btn1"></div>' +
-        '</div>';
 
-        
-        ;
-        
+      // var content =
+      //   '<div class="info">' +
+      //   '   <div class="title">' + area.name + '</div>' +
+      //   '   <div class="size">총 면적 : 약 ' + Math.floor(polygon.getArea()) + ' m<sup>2</sup></div>' +
+      //   '<div> <input type="button" onclick="location.href=\'api?locate=\'"+"area.name" value="정보보기"></div>' +
+      //   '</div>';
+      
+      var content = ()=>{
+        return (
+          <>
+            <h1>hh</h1>
+          </>
+        )
+      }
+
+
+
 
       infowindow.setContent(content);
       infowindow.setPosition(mouseEvent.latLng);
       infowindow.setMap(map);
     });
-    
+
   }
-  
+
 
   return (
     <div>
