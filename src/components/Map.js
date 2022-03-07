@@ -1,9 +1,10 @@
 /*global kakao*/
 import React, { useEffect } from 'react'
+import { useHistory } from 'react-router-dom';
 const infowindow = new kakao.maps.InfoWindow({ removable: true, width: 500 });
 
 const Map = (props) => {
-
+  const history = useHistory();
   useEffect(() => {
     let container = document.getElementById("map");
     let options = {
@@ -29,7 +30,6 @@ const Map = (props) => {
   function displayArea(map, area) {
 
     const customOverlay = new kakao.maps.CustomOverlay({})
-
 
     //다각형 생성
     var polygon = new kakao.maps.Polygon({
@@ -69,7 +69,18 @@ const Map = (props) => {
 
     // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
     kakao.maps.event.addListener(polygon, 'click', function (mouseEvent) {
+      // function show(){
+      //   console.log("gg")
+      // }
+
+      // var content =
+      //   '<div class="info">' +
+      //   '   <div class="title">' + area.name + '</div>' +
+      //   '   <div class="size">총 면적 : 약 ' + Math.floor(polygon.getArea()) + ' m<sup>2</sup></div>' +
+      //   '<div> <input type="button" onclick="location.href=\'api?locate=\'"+"area.name" value="정보보기"></div>' +
+      //   '</div>';
       
+
       
       var content = 
         '<div class="info" style="width:300px;padding:6px 0;">' +
@@ -83,6 +94,8 @@ const Map = (props) => {
       // function myFunction(){
       //   console.log("hh")
       // }
+     
+
 
       // infowindow.setContent('<button onclick="myFunction()">Click me</button>');
       infowindow.setContent(content)
@@ -90,10 +103,8 @@ const Map = (props) => {
       infowindow.setPosition(mouseEvent.latLng);
       infowindow.setMap(map);
     });
-    
-  }
-  
 
+  }
   return (
     <div>
       <h1>dd</h1>
