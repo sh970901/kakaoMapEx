@@ -90,6 +90,7 @@ const Map = (props) => {
         '<button type="button" id= \'btn1\'></button>'+
         '</div>';
       
+
       // const someButton = document.getElementById('btn1')
       // someButton.addEventListener('click', function(event){
       //   alert('gg')
