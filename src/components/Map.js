@@ -1,9 +1,10 @@
 /*global kakao*/
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 const infowindow = new kakao.maps.InfoWindow({ removable: true, width: 500 });
 
 const Map = (props) => {
+  const [word, setWord] = useState("1");
   const history = useHistory();
   useEffect(() => {
     let container = document.getElementById("map");
@@ -19,18 +20,19 @@ const Map = (props) => {
 
   function view(map) {
     for (var i = 0, len = props.location.length; i < len; i++) {
-      console.log(props.location[i])
       displayArea(map, props.location[i]);
     }
   }
   useEffect(() => {
     infowindow.close()
   }, [])
+  useEffect(()=>{
+    console.log("gg")
+  },[])
 
   function displayArea(map, area) {
 
     const customOverlay = new kakao.maps.CustomOverlay({})
-
 
     //다각형 생성
     var polygon = new kakao.maps.Polygon({
@@ -70,36 +72,35 @@ const Map = (props) => {
 
     // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
     kakao.maps.event.addListener(polygon, 'click', function (mouseEvent) {
-      // function show(){
-      //   console.log("gg")
-      // }
-
       // var content =
       //   '<div class="info">' +
       //   '   <div class="title">' + area.name + '</div>' +
       //   '   <div class="size">총 면적 : 약 ' + Math.floor(polygon.getArea()) + ' m<sup>2</sup></div>' +
       //   '<div> <input type="button" onclick="location.href=\'api?locate=\'"+"area.name" value="정보보기"></div>' +
       //   '</div>';
+      var content =
+        '<div class="info" style="width:300px; height:100px;padding:6px 0;">' +
+        '<input id="dn" type="text" value="값">'+
+        '   <div class="title">' + area.name + '</div>' +
+        '   <div class="size">총 면적 : 약 ' + Math.floor(polygon.getArea()) + ' m<sup>2</sup></div>' +
+        //'<button type="button" id=\'btn1\' onclick="document.getElementById(\'dn\').value=\'111!\'">' + area.name + '</btton>' +
+        // '<button type="button" id=\'btn1\' onclick="console.log(document.getElementById(\'dn\').value)">' + area.name + '</btton>' +
+        // '<button type="button" id= \'btn1\'></button>'+
+        '<button type="button" onclick="console.log(word)"></button>'+
+        '<button type="button" id= \'btn1\'></button>'+
+        '</div>';
       
-      var content = ()=>{
-        return (
-          <>
-            <h1>hh</h1>
-          </>
-        )
-      }
-
-
-
-
-      infowindow.setContent(content);
+      // const someButton = document.getElementById('btn1')
+      // someButton.addEventListener('click', function(event){
+      //   alert('gg')
+      // })
+      
+      infowindow.setContent(content)
       infowindow.setPosition(mouseEvent.latLng);
       infowindow.setMap(map);
     });
 
   }
-
-
   return (
     <div>
       <h1>dd</h1>
